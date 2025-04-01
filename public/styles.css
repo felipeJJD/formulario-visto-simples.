@@ -1,61 +1,102 @@
 /* Estilos personalizados para o formulário */
 body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background-color: #f5f5f5;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .card {
-  border-radius: 15px;
+  border-radius: 8px;
   overflow: hidden;
   margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-  background: linear-gradient(135deg, #0d6efd, #0a58ca);
+  background: #FF6B00 !important;
+  border-bottom: none;
+  padding: 20px;
 }
 
 h1 {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 h3 {
   border-bottom: 2px solid #e9ecef;
-  padding-bottom: 10px;
-  font-weight: 600;
+  padding-bottom: 15px;
+  margin-top: 30px;
+  font-weight: 500;
+  color: #FF6B00;
 }
 
 .form-label {
   font-weight: 500;
+  margin-bottom: 8px;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 /* Destaque para campos obrigatórios */
 .form-control:required, .form-select:required {
-  border-left: 3px solid #0d6efd;
+  border-left: 3px solid #FF6B00;
 }
 
 /* Melhoria de acessibilidade */
 .form-control:focus, .form-select:focus {
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(255, 107, 0, 0.25);
+  border-color: #FF6B00;
 }
 
 /* Estilo para o botão de envio */
 .btn-primary {
-  background: linear-gradient(135deg, #0d6efd, #0a58ca);
+  background: #FF6B00 !important;
   border: none;
-  padding: 10px 30px;
-  font-weight: 600;
+  padding: 12px 32px;
+  font-weight: 500;
   transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-primary:hover {
+  background: #e65e00 !important;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
 }
 
 .btn-primary:active {
   transform: translateY(0);
 }
+
+/* Estilização de inputs */
+.form-control, .form-select {
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border: 1px solid #ced4da;
+}
+
+.form-control:hover, .form-select:hover {
+  border-color: #adb5bd;
+}
+
+/* Animação de entrada para campos */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.row .col-md-4, .row .col-md-6, .row .col-md-12, .row .col-12 {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.row .col-md-4:nth-child(1), .row .col-md-6:nth-child(1) { animation-delay: 0.05s; }
+.row .col-md-4:nth-child(2), .row .col-md-6:nth-child(2) { animation-delay: 0.1s; }
+.row .col-md-4:nth-child(3) { animation-delay: 0.15s; }
 
 /* Responsividade */
 @media (max-width: 768px) {
@@ -66,18 +107,50 @@ h3 {
   h3 {
     font-size: 1.2rem;
   }
+  
+  .btn-primary {
+    padding: 10px 20px;
+  }
 }
 
 /* Animação para alertas */
 .alert {
   transition: all 0.5s ease;
+  border-radius: 4px;
 }
 
 .alert.fade-in {
   animation: fadeIn 0.5s;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Estilo para os selects e radio buttons */
+.form-select {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Estilo para o rodapé */
+.card-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Estilização dos placeholders */
+::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+  opacity: 1;
+}
+
+/* Melhorias de acessibilidade */
+.form-control:focus, .form-select:focus {
+  outline: none;
+}
+
+/* Ajustes para espaçamento */
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+
+.mt-4 {
+  margin-top: 1.5rem !important;
 }
