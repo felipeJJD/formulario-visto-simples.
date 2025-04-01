@@ -4,6 +4,33 @@ document.addEventListener('DOMContentLoaded', function() {
   const submissionAlert = document.getElementById('submission-alert');
   const errorAlert = document.getElementById('error-alert');
   
+  // Elementos para exibição condicional
+  const travelPaymentSelect = document.getElementById('travelPayment');
+  const sponsorSection = document.getElementById('sponsorSection');
+  const relativesInUSSelect = document.getElementById('relativesInUS');
+  const usContactSection = document.getElementById('usContactSection');
+  
+  // Handlers para exibição condicional de seções
+  if (travelPaymentSelect) {
+    travelPaymentSelect.addEventListener('change', function() {
+      if (this.value === 'Outra pessoa') {
+        sponsorSection.style.display = 'block';
+      } else {
+        sponsorSection.style.display = 'none';
+      }
+    });
+  }
+  
+  if (relativesInUSSelect) {
+    relativesInUSSelect.addEventListener('change', function() {
+      if (this.value === 'Sim') {
+        usContactSection.style.display = 'block';
+      } else {
+        usContactSection.style.display = 'none';
+      }
+    });
+  }
+  
   // Handler para envio do formulário
   form.addEventListener('submit', async function(event) {
     event.preventDefault();

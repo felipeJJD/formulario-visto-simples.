@@ -154,8 +154,100 @@
                   </select>
                 </div>
                 <div class="col-md-4 mb-3">
-                  <label for="countriesVisited" class="form-label">Outros países já visitados</label>
-                  <input type="text" class="form-control" id="countriesVisited" name="countriesVisited">
+                  <label for="countriesVisited5Years" class="form-label">Países visitados nos últimos 5 anos</label>
+                  <input type="text" class="form-control" id="countriesVisited5Years" name="countriesVisited5Years" placeholder="Ex: Portugal, Espanha, Itália">
+                </div>
+              </div>
+              
+              <!-- Informações de quem vai custear a viagem - aparece apenas se "Outra pessoa" for selecionada -->
+              <div id="sponsorSection" style="display: none;">
+                <h4 class="mt-3 mb-3">Informações de quem vai custear a viagem</h4>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="sponsorName" class="form-label">Nome completo</label>
+                    <input type="text" class="form-control" id="sponsorName" name="sponsorName">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="sponsorEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="sponsorEmail" name="sponsorEmail">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <label for="sponsorMaritalStatus" class="form-label">Estado Civil</label>
+                    <select class="form-select" id="sponsorMaritalStatus" name="sponsorMaritalStatus">
+                      <option value="Solteiro">Solteiro(a)</option>
+                      <option value="Casado">Casado(a)</option>
+                      <option value="Divorciado">Divorciado(a)</option>
+                      <option value="Viúvo">Viúvo(a)</option>
+                      <option value="Separado">Separado(a)</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="sponsorPhone" class="form-label">Telefone</label>
+                    <input type="tel" class="form-control" id="sponsorPhone" name="sponsorPhone">
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="sponsorRelationship" class="form-label">Grau de parentesco</label>
+                    <input type="text" class="form-control" id="sponsorRelationship" name="sponsorRelationship">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <label for="sponsorBirthDate" class="form-label">Data de Nascimento</label>
+                    <input type="date" class="form-control" id="sponsorBirthDate" name="sponsorBirthDate">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="relativesInUS" class="form-label">Tem parentes ou conhecidos nos EUA?</label>
+                  <select class="form-select" id="relativesInUS" name="relativesInUS" required>
+                    <option value="Não">Não</option>
+                    <option value="Sim">Sim</option>
+                  </select>
+                </div>
+              </div>
+              
+              <!-- Informações de quem o solicitante conhece nos EUA - aparece apenas se "Sim" for selecionado -->
+              <div id="usContactSection" style="display: none;">
+                <h4 class="mt-3 mb-3">Informações do contato nos EUA</h4>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="usContactName" class="form-label">Nome completo</label>
+                    <input type="text" class="form-control" id="usContactName" name="usContactName">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="usContactEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="usContactEmail" name="usContactEmail">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <label for="usContactMaritalStatus" class="form-label">Estado Civil</label>
+                    <select class="form-select" id="usContactMaritalStatus" name="usContactMaritalStatus">
+                      <option value="Solteiro">Solteiro(a)</option>
+                      <option value="Casado">Casado(a)</option>
+                      <option value="Divorciado">Divorciado(a)</option>
+                      <option value="Viúvo">Viúvo(a)</option>
+                      <option value="Separado">Separado(a)</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="usContactPhone" class="form-label">Telefone</label>
+                    <input type="tel" class="form-control" id="usContactPhone" name="usContactPhone">
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="usContactRelationship" class="form-label">Grau de parentesco</label>
+                    <input type="text" class="form-control" id="usContactRelationship" name="usContactRelationship">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <label for="usContactBirthDate" class="form-label">Data de Nascimento</label>
+                    <input type="date" class="form-control" id="usContactBirthDate" name="usContactBirthDate">
+                  </div>
                 </div>
               </div>
               

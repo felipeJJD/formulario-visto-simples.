@@ -127,10 +127,23 @@ app.post('/api/submit-form', async (req, res) => {
       data_inicio_curso: formatarData(formData.courseStartDate),
       data_termino_curso: formatarData(formData.courseEndDate),
       fala_outra_lingua: formData.languages || 'não',
-      outros_paises_visitados: formData.countriesVisited || '',
+      outros_paises_visitados: formData.countriesVisited5Years || '',
       servico_militar: formData.militaryService || 'nunca',
       ultima_formacao: formData.highestEducation || '',
-      sexo: formData.gender || 'M'
+      sexo: formData.gender || 'M',
+      // Novos campos adicionados
+      sponsor_nome: formData.sponsorName || '',
+      sponsor_email: formData.sponsorEmail || '',
+      sponsor_estado_civil: formData.sponsorMaritalStatus || '',
+      sponsor_telefone: formData.sponsorPhone || '',
+      sponsor_parentesco: formData.sponsorRelationship || '',
+      sponsor_data_nascimento: formatarData(formData.sponsorBirthDate),
+      contato_eua_nome: formData.usContactName || '',
+      contato_eua_email: formData.usContactEmail || '',
+      contato_eua_estado_civil: formData.usContactMaritalStatus || '',
+      contato_eua_telefone: formData.usContactPhone || '',
+      contato_eua_parentesco: formData.usContactRelationship || '',
+      contato_eua_data_nascimento: formatarData(formData.usContactBirthDate)
     };
     
     // Filtrar apenas os valores não undefined
