@@ -32,7 +32,11 @@ const pool = new Pool({
   database: process.env.DB_NAME,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  ssl: process.env.NODE_ENV === 'production'
+  connectionTimeoutMillis: 5000,
+  query_timeout: 5000,
+  ssl: {
+    rejectUnauthorized: false // Aceitar certificados auto-assinados
+  }
 });
 
 // Verificar conexão com o banco de dados
@@ -130,10 +134,21 @@ function formatarData(dataString) {
 
 // Rota para enviar os dados do formulário
 app.post('/api/submit-form', async (req, res) => {
-  const formData = req.body;
-  
   try {
+    const formData = req.body;
     console.log('Dados recebidos:', formData);
+    
+    // Função para formatar datas
+    function formatarData(dataStr) {
+      if (!dataStr) return null;
+      try {
+        const data = new Date(dataStr);
+        return data.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+      } catch (error) {
+        console.error('Erro ao formatar data:', error);
+        return null;
+      }
+    }
     
     // Mapeamento dos campos do formulário para as colunas do banco de dados
     const dadosParaInserir = {
@@ -185,21 +200,29 @@ app.post('/api/submit-form', async (req, res) => {
       outros_paises_visitados: formData.countriesVisited5Years || '',
       servico_militar: formData.militaryService || 'nunca',
       ultima_formacao: formData.highestEducation || '',
-      sexo: formData.gender || 'M',
-      // Novos campos adicionados
-      sponsor_nome: formData.sponsorName || '',
-      sponsor_email: formData.sponsorEmail || '',
-      sponsor_estado_civil: formData.sponsorMaritalStatus || '',
-      sponsor_telefone: formData.sponsorPhone || '',
-      sponsor_parentesco: formData.sponsorRelationship || '',
-      sponsor_data_nascimento: formatarData(formData.sponsorBirthDate),
-      contato_eua_nome: formData.usContactName || '',
-      contato_eua_email: formData.usContactEmail || '',
-      contato_eua_estado_civil: formData.usContactMaritalStatus || '',
-      contato_eua_telefone: formData.usContactPhone || '',
-      contato_eua_parentesco: formData.usContactRelationship || '',
-      contato_eua_data_nascimento: formatarData(formData.usContactBirthDate)
+      sexo: formData.gender || 'M'
     };
+    
+    // Adicionar campos extras ao objeto existente
+    // Estes serão adicionados à query se não estiverem no SELECT da tabela
+    // Se a tabela não tiver estas colunas, o PostgreSQL vai ignorá-las silenciosamente
+    if (formData.travelPayment === 'Outra pessoa') {
+      dadosParaInserir.sponsor_nome = formData.sponsorName || '';
+      dadosParaInserir.sponsor_email = formData.sponsorEmail || '';
+      dadosParaInserir.sponsor_estado_civil = formData.sponsorMaritalStatus || '';
+      dadosParaInserir.sponsor_telefone = formData.sponsorPhone || '';
+      dadosParaInserir.sponsor_parentesco = formData.sponsorRelationship || '';
+      dadosParaInserir.sponsor_data_nascimento = formatarData(formData.sponsorBirthDate);
+    }
+    
+    if (formData.relativesInUS === 'Sim') {
+      dadosParaInserir.contato_eua_nome = formData.usContactName || '';
+      dadosParaInserir.contato_eua_email = formData.usContactEmail || '';
+      dadosParaInserir.contato_eua_estado_civil = formData.usContactMaritalStatus || '';
+      dadosParaInserir.contato_eua_telefone = formData.usContactPhone || '';
+      dadosParaInserir.contato_eua_parentesco = formData.usContactRelationship || '';
+      dadosParaInserir.contato_eua_data_nascimento = formatarData(formData.usContactBirthDate);
+    }
     
     // Filtrar apenas os valores não undefined
     const colunas = Object.keys(dadosParaInserir).filter(key => dadosParaInserir[key] !== undefined);
